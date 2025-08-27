@@ -17,7 +17,7 @@ Constructs the test statistic from the implied barriers $\widehat m$ and $\wideh
   * `avar_r.mat`: wide table across $\epsilon$ with $[m\; V_{\epsilon}(m)]$
 
 * **Simulators**:
-  Heston model for the efficient price with tick-level observations. Jumps can be added with selected intensities; an option with market microstructure noise (autocorrelated Gaussian-t mixture noise and roundin errors) is included.
+  Heston model for the efficient price with tick-level observations. Jumps can be added with selected intensities; an option with market microstructure noise (autocorrelated Gaussian-t mixture noise and rounding errors) is included.
 
 * **Monte Carlo examples**:
   Size and size-adjusted power across barrier widths $c$ and censoring parameters $\epsilon$.
@@ -26,34 +26,31 @@ Constructs the test statistic from the implied barriers $\widehat m$ and $\wideh
 
 ## Package layout
 
-* **`numerical_h_hbar/` — Tables and builders**
+* **`numerical_h_hbar/` — Reproduce the function tables**
 
-  * `h_simulate.m`: compute $h_{2}$, $h_{2,\epsilon}$, derivatives, and $V_{\epsilon}$ on an $m$-grid
+  * `h_simulate.m`: compute $h_{2}$, $h_{2,\epsilon}$, first-order derivatives, and $V_{\epsilon}$ on an $m$ grid
   * `h_first_derivative.m`: local-linear slope estimator of $h'(m)$
-  * `ret_delta.m`: barrier-hitting (first-passage) returns $r^{(m)}$
+  * `ret_delta.m`: Price duration sampled (barrier-hitting) returns $r^{(c)}$
   * `h_vec.mat`, `h_eps_vec.mat`, `avar_r.mat`: saved tables used by the test
 
-* **`testToolbox/` — Ratio test and helpers (paper notation)**
+* **`testToolbox/` — Test statistic and helper functions**
 
-  * `testLLNNY.m`: builds $Z_{\epsilon}$ from implied barriers and $V_{\epsilon}$
+  * `testLLNNY.m`: builds the test statistic from implied barriers and $V_{\epsilon}$
   * `invFunc.m`: robust monotone inverse on tabulated $[m, Y(m)]$
   * `linearInt.m`: clamped `interp1` wrapper for table lookup
-  * `ret_delta.m`: price-duration (barrier-hitting) sampling
+  * `ret_delta.m`: price duration (barrier-hitting) sampling
   * `finddata.m`: slice $\epsilon$-specific columns to two-column tables
-  * `wb_preaveraging.m`: pre-averaging; optional wild bootstrap (paper)
-  * `pseudo.m`: compatibility wrapper that calls `wb_preaveraging` (pre-averaging only)
+  * `wb_preaveraging.m`: wild-bootstrapped preaveraging
 
-* **`MCExamples/` — Reproducible Monte Carlo experiments**
+* **`MCExamples/` — Monte Carlo Examples**
 
   * `simulatePrices/`
 
-    * `simPriceEfficient.m`: Heston + Laplace jumps (levels)
-    * `simPriceNoise_autoGau_t.m`: Heston + jumps + microstructure noise (levels)
-    * `MA_noise.m`, `rounding.m`, `randLaplace.m` (if used)
-  * `mainNoNoise.m`: size & power without microstructure noise
-  * `mainWithNoise.m`: size & power with noise (pre-averaging option)
-
-* **`LLNNY_Jumps.pdf` — Paper** (notation and theory)
+    * `simPriceEfficient.m`: Heston + Jumps
+    * `simPriceNoise_autoGau_t.m`: Heston + Jumps + Microstructure Noise
+    * `MA_noise.m`, `rounding.m`, `randLaplace.m`: Helper functions for microstructure noise simulation
+  * `mainNoNoise.m`: empirical size & power without microstructure noise
+  * `mainWithNoise.m`: empirical size & power with noise (with pre-averaging)
 
 ---
 
