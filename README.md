@@ -1,48 +1,106 @@
 # Testing for Jumps in a Discretely Observed Price Process with Endogenous Sampling Times — MATLAB Code
 
-This repository contains the MATLAB code and simulation examples of **“Testing for Jumps in a Discretely Observed Price Process with Endogenous Sampling Times.”** You can find the latest draft and supplemental materials on my website.
+This repository contains the MATLAB code and simulation examples for **“Testing for Jumps in a Discretely Observed Price Process with Endogenous Sampling Times.”**
+You can find the latest draft and supplemental materials on the author’s website.
 
 ---
 
 ## What’s inside
 
-* **Test implementation (`testLLNNY.m`)**:
-  Construct the test statistic from $M_{c}$ and $M_{c,\epsilon}$ by inverting the functions $h_{2}(m)$ and $h_{2,\epsilon}(m)$.
+* **Test implementation (`testLLNNY.m`)**
+  Constructs the ratio statistic from the empirical quantities $M_{c}$ and $M_{c,\epsilon}$ by **inverting** the tabulated maps $h_{2}(m)$ and $h_{2,\epsilon}(m)$ to obtain the **implied barriers** $\widehat m$ and $\widehat m_{\epsilon}$. The statistic
 
-* **Precomputed tables**:
-  `h_vec.mat`: $h_{2}(m)$, `h_eps_vec.mat`: $h_{2,\epsilon}(m)$, `avar_r.mat`: $V_{\epsilon}(m)$.
+  $$
+  Z_{\epsilon} \;=\; \frac{\widehat m_{\epsilon}/\widehat m - 1}{\sqrt{\,V_{\epsilon}(\widehat m_{\epsilon})/n\,}}
+  $$
 
-* **Simulators**:
-  Simulate a Heston model for the effcient price process and obtain its tick-level observations, to which we add jumps with different sizes.
+  uses the precomputed variance function $V_{\epsilon}(m)$ on the same barrier grid.
 
-* **Monte Carlo examples**:
-  Size and (size-adjusted) power across various barrier width $c$ and censoring parameter $\epsilon$.
+* **Precomputed tables**
+
+  * `h_vec.mat`: two-column table $[m,\; h_{2}(m)]$
+  * `h_eps_vec.mat`: wide table across $\epsilon \in \{0.01,\ldots,1.00\}$ with $[m,\; h_{2,\epsilon}(m)]$
+  * `avar_r.mat`: wide table across $\epsilon$ with $[m,\; V_{\epsilon}(m)]$
+
+* **Simulators**
+  Heston dynamics for the efficient price with **tick-level** observations. Jump **levels** (compound Laplace) can be added at controlled intensities/sizes; an option with **microstructure noise** (autocorrelated Gaussian + $t$-mixture) is included.
+
+* **Monte Carlo examples**
+  Size and **size-adjusted power** across working barrier widths $c$ (via $K\sqrt{\mathrm{Var}(\Delta X)}$) and censoring parameters $\epsilon$.
 
 ---
 
-## Folder structure
+## Package layout
 
-```
-numerical_h_hbar/
-  h_simulate.m                % build h2, h2,ε, derivatives, AVAR_r
-  h_first_derivative.m
-  ret_delta.m
-  h_vec.mat
-  h_eps_vec.mat
-  avar_r.mat
+* **`numerical_h_hbar/` — Tables and builders**
 
-testToolbox/
-  testLLNNY.m                 % test statistic
-  invFunc.m                   % monotone inverse on [m, Y(m)]
-  linearInt.m                 % safe interp1 wrapper
-  ret_delta.m                 % price duration sampling
-  finddata.m                  % select the columns (corresponding to select epsilon) in h_vec.mat, h_eps_vec.mat and avar_r.mat
-  wb_preaveraging.m           % wild-bootstrapped preaveraging
+  * `h_simulate.m`: compute $h_{2}$, $h_{2,\epsilon}$, derivatives, and $V_{\epsilon}$ on an $m$-grid
+  * `h_first_derivative.m`: local-linear slope estimator of $h'(m)$
+  * `ret_delta.m`: barrier-hitting (first-passage) returns $r^{(m)}$
+  * `h_vec.mat`, `h_eps_vec.mat`, `avar_r.mat`: saved tables used by the test
 
-MCExamples/
-  simulatePrices/
-    simPriceEfficient.m
-    simPriceNoise_autoGau_t.m
-    MA_noise.m, rounding.m, randLaplace.m
-  mainNoNoise.m
-  mainWithNoise.m
+* **`testToolbox/` — Ratio test and helpers (paper notation)**
+
+  * `testLLNNY.m`: builds $Z_{\epsilon}$ from implied barriers and $V_{\epsilon}$
+  * `invFunc.m`: robust monotone inverse on tabulated $[m, Y(m)]$
+  * `linearInt.m`: clamped `interp1` wrapper for table lookup
+  * `ret_delta.m`: price-duration (barrier-hitting) sampling
+  * `finddata.m`: slice $\epsilon$-specific columns to two-column tables
+  * `wb_preaveraging.m`: pre-averaging; optional wild bootstrap (paper)
+  * `pseudo.m`: compatibility wrapper that calls `wb_preaveraging` (pre-averaging only)
+
+* **`MCExamples/` — Reproducible Monte Carlo experiments**
+
+  * `simulatePrices/`
+
+    * `simPriceEfficient.m`: Heston + Laplace jumps (levels)
+    * `simPriceNoise_autoGau_t.m`: Heston + jumps + microstructure noise (levels)
+    * `MA_noise.m`, `rounding.m`, `randLaplace.m` (if used)
+  * `mainNoNoise.m`: size & power without microstructure noise
+  * `mainWithNoise.m`: size & power with noise (pre-averaging option)
+
+* **`LLNNY_Jumps.pdf` — Paper** (notation and theory)
+
+---
+
+## Reproducing the tables $h_{2}$, $h_{2,\epsilon}$, $V_{\epsilon}$
+
+1. Simulate a long Gaussian random walk and, for each grid value $m$, compute $h_{2}(m)$ and $h_{2,\epsilon}(m)$ (censoring at $m(1+\epsilon)$).
+2. Estimate $h'_{2}(m)$ and $h'_{2,\epsilon}(m)$ with local-linear slopes (`h_first_derivative.m`).
+3. Assemble the variance function $V_{\epsilon}(m)$ via the delta-method expressions.
+4. Save `h_vec.mat`, `h_eps_vec.mat`, `avar_r.mat`.
+
+> Assumptions for inversion: the maps are **monotone decreasing** and smooth on the grid. `invFunc.m` combines a tail quadratic (on $\mu_2$) and a local inverse quadratic (in $1/m$) with a monotone interpolation fallback.
+
+---
+
+## Monte Carlo usage
+
+* **Null:** $X = X^{c}$ (diffusion; optionally with noise in levels).
+* **Alternatives:** $X = X^{c} + X^{d}$ (compound Laplace jump levels).
+* **Barrier choice per path:** $c_i = K \sqrt{\mathrm{Var}(\Delta X_i)}$. With noise, you may pre-average **only to compute $c_i$**.
+* **Power reporting:** condition on paths with at least one jump ($N>0$).
+* **Size-adjusted power:** compare to the **empirical** 95th percentile from the null **for each $K$**.
+
+---
+
+## Helper functions (brief)
+
+* `testLLNNY(X, c, eps, H2_tab, H2eps_tab, Veps_tab)` → `[Z_eps, m_hat_eps, m_hat, N_c]`
+  Builds $M_c$ and $M_{c,\epsilon}$, inverts to $\widehat m,\widehat m_{\epsilon}$, looks up $V_{\epsilon}(\widehat m_{\epsilon})$, and returns $Z_{\epsilon}$.
+
+* `finddata(eps, h_eps_vec, avar_r)`
+  From wide matrices across $\epsilon$, extract two-column tables $[m, h_{2,\epsilon}(m)]$ and $[m, V_{\epsilon}(m)]$.
+
+* `invFunc(Y_trial, [m, Y(m)])`
+  Robust monotone inverse of a **decreasing** tabulated map.
+
+* `linearInt(x, [xgrid, ygrid], method)`
+  Clamped `interp1` lookup (default `'linear'`).
+
+* `ret_delta(price, m)`
+  Barrier-hitting (first-passage) returns $r^{(m)}$.
+
+* `wb_preaveraging(x, kn, 'flip',bool,'perm',bool)`
+  Pre-averaged path and, if requested, wild-bootstrapped pseudo path (sign-flip + permutation).
+  `pseudo.m` returns the pre-averaged levels only.
