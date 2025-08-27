@@ -1,6 +1,6 @@
-# # LLNNY Ratio Test for Jumps (MATLAB)
+# Testing for Jumps in a Discretely Observed Price Process with Endogenous Sampling Times
 
-This repository implements the **ratio test** described in `LLNNY_Jumps.pdf`. The code follows the paper’s notation throughout:
+This repository contains the MATLAB code and simulation examples of “Testing for Jumps in a Discretely Observed Price Process with Endogenous Sampling Times.” You can find the latest draft and supplemental materials on my website.
 
 * **Barrier** $m$ (theoretical) and **working barrier** $c$ (chosen from data).
 * **Barrier-hitting (first-passage) sampling** of returns $r^{(m)}$ / $r^{(c)}$.
