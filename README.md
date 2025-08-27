@@ -37,7 +37,7 @@ testToolbox/
   linearInt.m                 % safe interp1 wrapper
   ret_delta.m                 % price duration sampling
   finddata.m                  % select the columns (corresponding to select epsilon) in h_vec.mat, h_eps_vec.mat and avar_r.mat
-  wb_preaveraging.m           % wild-bootstarpped preaveraging
+  wb_preaveraging.m           % wild-bootstrapped preaveraging
 
 MCExamples/
   simulatePrices/
