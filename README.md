@@ -17,7 +17,7 @@ You can find the latest draft and supplemental materials on the author’s websi
   * `avar_r.mat`: wide table across $\epsilon$ with $[m\; V_{\epsilon}(m)]$
 
 * **Simulators**:
-  Heston dynamics for the efficient price with **tick-level** observations. Jump **levels** (compound Laplace) can be added at controlled intensities/sizes; an option with **microstructure noise** (autocorrelated Gaussian-t mixture noise) is included.
+  Heston model for the efficient price with **tick-level** observations. Jumps (compound Laplace) can be added at controlled intensities/sizes; an option with **microstructure noise** (autocorrelated Gaussian-t mixture noise) is included.
 
 * **Monte Carlo examples**:
   Size and size-adjusted power across barrier widths $c$ (via $K\sqrt{\mathrm{Var}(\Delta X)}$) and censoring parameters $\epsilon$.
