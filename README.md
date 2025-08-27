@@ -8,7 +8,7 @@ You can find the latest draft and supplemental materials on the author’s websi
 ## What’s inside
 
 * **Test statistic (`testLLNNY.m`)**:
-Constructs the ratio statistic from the implied barriers $\widehat m$ and $\widehat m_{\epsilon}$ by inverting the (precomputed) functions $h_{2}(m)$ and $h_{2,\epsilon}(m)$ to obtain . The test statistic uses the precomputed variance function $V_{\epsilon}(m)$ on the same barrier grid.
+Constructs the ratio statistic from the implied barriers $\widehat m$ and $\widehat m_{\epsilon}$ by inverting the (precomputed) functions $h_{2}(m)$ and $h_{2,\epsilon}(m)$.
 
 * **Precomputed tables**:
 
