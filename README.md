@@ -7,19 +7,19 @@ You can find the latest draft and supplemental materials on the author’s websi
 
 ## What’s inside
 
-* **Test implementation (`testLLNNY.m`)**
+* **Test statistic (`testLLNNY.m`)**:
   Constructs the ratio statistic from the empirical quantities $M_{c}$ and $M_{c,\epsilon}$ by **inverting** the functions $h_{2}(m)$ and $h_{2,\epsilon}(m)$ to obtain the **implied barriers** $\widehat m$ and $\widehat m_{\epsilon}$. The test statistic uses the precomputed variance function $V_{\epsilon}(m)$ on the same barrier grid.
 
-* **Precomputed tables**
+* **Precomputed tables**:
 
   * `h_vec.mat`: two-column table $[m\; h_{2}(m)]$
   * `h_eps_vec.mat`: wide table across $\epsilon$ from 0.01 to 1.00 with $[m\; h_{2,\epsilon}(m)]$
   * `avar_r.mat`: wide table across $\epsilon$ with $[m\; V_{\epsilon}(m)]$
 
-* **Simulators**
+* **Simulators**:
   Heston dynamics for the efficient price with **tick-level** observations. Jump **levels** (compound Laplace) can be added at controlled intensities/sizes; an option with **microstructure noise** (autocorrelated Gaussian-t mixture noise) is included.
 
-* **Monte Carlo examples**
+* **Monte Carlo examples**:
   Size and size-adjusted power across barrier widths $c$ (via $K\sqrt{\mathrm{Var}(\Delta X)}$) and censoring parameters $\epsilon$.
 
 ---
