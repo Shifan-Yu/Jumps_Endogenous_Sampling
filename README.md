@@ -20,7 +20,7 @@ You can find the latest draft and supplemental materials on the author’s websi
   Heston model for the efficient price with **tick-level** observations. Jumps (compound Laplace) can be added at controlled intensities/sizes; an option with **microstructure noise** (autocorrelated Gaussian-t mixture noise) is included.
 
 * **Monte Carlo examples**:
-  Size and size-adjusted power across barrier widths $c$ (via $K\sqrt{\mathrm{Var}(\Delta X)}$) and censoring parameters $\epsilon$.
+  Size and size-adjusted power across barrier widths $c$ and censoring parameters $\epsilon$.
 
 ---
 
