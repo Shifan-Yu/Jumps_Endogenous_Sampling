@@ -7,7 +7,7 @@ This repository contains the MATLAB code and simulation examples of **“Testing
 ## What’s inside
 
 * **Test implementation (`testLLNNY.m`)**:
-  Construct the test statistic from **implied barriers** $M_{c}$ and $\bar{M}_{c,\epsilon}$ by inverting the functions $h_{2}(m)$ and $h_{2,\varepsilon}(m)$.
+  Construct the test statistic from **implied barriers** $M_{c}$ and $M_{c,\epsilon}$ by inverting the functions $h_{2}(m)$ and $h_{2,\varepsilon}(m)$.
 
 * **Precomputed tables**:
   `h_vec.mat` $h_{2}(m)$, `h_eps_vec.mat` $h_{2,\epsilon}(m)$, `avar_r.mat` $\hat{V}_{\epsilon}(m)$.
