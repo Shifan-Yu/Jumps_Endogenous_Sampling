@@ -12,9 +12,9 @@ You can find the latest draft and supplemental materials on the author’s websi
 
 * **Precomputed tables**
 
-  * `h_vec.mat`: two-column table $[m,\; h_{2}(m)]$
-  * `h_eps_vec.mat`: wide table across $\epsilon \in \{0.01,\ldots,1.00\}$ with $[m,\; h_{2,\epsilon}(m)]$
-  * `avar_r.mat`: wide table across $\epsilon$ with $[m,\; V_{\epsilon}(m)]$
+  * `h_vec.mat`: two-column table $[m\; h_{2}(m)]$
+  * `h_eps_vec.mat`: wide table across $\epsilon \in \{0.01,\ldots,1.00\}$ with $[m\; h_{2,\epsilon}(m)]$
+  * `avar_r.mat`: wide table across $\epsilon$ with $[m\; V_{\epsilon}(m)]$
 
 * **Simulators**
   Heston dynamics for the efficient price with **tick-level** observations. Jump **levels** (compound Laplace) can be added at controlled intensities/sizes; an option with **microstructure noise** (autocorrelated Gaussian-$t$-mixture noise) is included.
