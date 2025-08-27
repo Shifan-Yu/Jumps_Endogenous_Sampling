@@ -10,12 +10,12 @@ This repository contains the MATLAB code and simulation examples of **“Testing
   Construct the test statistic from $M_{c}$ and $M_{c,\epsilon}$ by inverting the functions $h_{2}(m)$ and $h_{2,\epsilon}(m)$.
 
 * **Precomputed tables**:
-  `h_vec.mat` $h_{2}(m)$, `h_eps_vec.mat` $h_{2,\epsilon}(m)$, `avar_r.mat` $\hat{V}_{\epsilon}(m)$.
+  `h_vec.mat`: $h_{2}(m)$, `h_eps_vec.mat`: $h_{2,\epsilon}(m)$, `avar_r.mat`: $\hat{V}_{\epsilon}(m)$.
 
-* **Simulators**
-  Heston model with jumps, with/without market microstructure noise.
+* **Simulators**:
+  Simulate a Heston model for the effcient price process and obtain its tick-level observations, to which we add jumps with different sizes.
 
-* **Monte Carlo examples**
+* **Monte Carlo examples**:
   Size and (size-adjusted) power across various barrier width $c$ and censoring parameter $\epsilon$.
 
 ---
