@@ -12,9 +12,9 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $\overli
 
 * **Precomputed tables**:
 
-  * `h_vec.mat`: two-column table $[m\; h_{2}(m)]$
-  * `h_eps_vec.mat`: wide table across $\epsilon \in [0.01,1.00]$ with $[m\; h_{2,\epsilon}(m)]$
-  * `avar_r.mat`: wide table across $\epsilon$ with $[m\; V_{\epsilon}(m)]$
+  * `h_vec.mat`: two-column table $[m, h_{2}(m)]$
+  * `h_eps_vec.mat`: wide table across $\epsilon \in [0.01,\dots,1.00]$ with $[m, h_{2,\epsilon}(m)]$
+  * `avar_r.mat`: wide table across $\epsilon$ with $[m, V_{\epsilon}(m)]$
 
 * **Simulators**:
   Heston model for the efficient price observed at tick level. Jumps can be added with user-selected intensities and scales. An option with market microstructure noise (autocorrelated Gaussian–t mixture and rounding) is included.
@@ -28,7 +28,7 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $\overli
 
 * **`numerical_h_hbar/` — Reproduce the function tables**
 
-  * `h_simulate.m`: compute $h_{2}$, $h_{2,\epsilon}$, first-order derivatives, and $V_{\epsilon}$ on an $m$ grid
+  * `h_simulate.m`: compute $h_{2}$, $h_{2,\epsilon}$, first-order derivatives, and $V_{\epsilon}$ on an $m$-grid
   * `h_first_derivative.m`: local-linear slope estimator of $h'(m)$
   * `ret_delta.m`: price duration (barrier-hitting) sampled returns $r^{(c)}$
   * `h_vec.mat`, `h_eps_vec.mat`, `avar_r.mat`: saved tables used by the test
