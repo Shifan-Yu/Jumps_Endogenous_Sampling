@@ -57,7 +57,7 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $M_{c,\e
 ## Workflow
 
 1. **Choose a working barrier $c$.**
-   In finite samples, set $c$ as $K$ times the standard deviation of tick-by-tick returns. Under microstructure noise, construct the sequence of pseudo-observations with selected pre-averaging windows with `wb_preaveraging`, then set $c$ from the pre-averaged returns. For example:
+   In finite samples, set $c$ as $K$ times the standard deviation of tick-by-tick returns. Under microstructure noise, construct the sequence of pseudo-observations with selected pre-averaging windows with `wb_preaveraging`, then set $c$ from the pre-averaged returns:
    ```matlab
    X_pa = wb_preaveraging(X, round(0.5*sqrt(n)));
    c    = K * sqrt(var(diff(X_pa), 1));
@@ -67,10 +67,10 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $M_{c,\e
    Use `ret_delta(X,c)` to extract $r^{(c)}$, then form the two empirical moments in `testLLNNY`.
 
 4. **Invert $h_2$ and $h_{2,\epsilon}$.**
-   With `H2_tab = [m,h_2(m)]` and `H2eps_tab = [m,h_{2,\epsilon}(m)]` (`finddata(eps, h_eps_vec, avar_r)` returns two-column tables for the chosen $\epsilon$), `invFunc` returns $\widehat m$ and $\widehat m_{\epsilon}$.
+   With `H2_tab = [m,h_2(m)]` and `H2eps_tab = [m,h_{2,\epsilon}(m)]` (obtained via `finddata(eps, h_eps_vec, avar_r)` for the chosen $\epsilon$), use `invFunc` to get $\widehat m$ and $\widehat m_{\epsilon}$.
 
 5. **Evaluate $V_{\epsilon}$ at $\widehat m_{\epsilon}$.**
-   `linearInt` performs the lookup to get $V_{\epsilon}(\widehat m_{\epsilon})$.
+   Use `linearInt` to look up $V_{\epsilon}(\widehat m_{\epsilon})$.
 
 6. **Construct $T_{c,\epsilon}$ and test.**
    Under the null, $T_{c,\epsilon}$ is asymptotically standard normal. For Monte Carlo size-adjusted power, compare to the empirical 95th percentile from the null for each $K$.
@@ -79,14 +79,14 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $M_{c,\e
 
 ## Reproducing the tables $h_{2}$, $h_{2,\epsilon}$, $V_{\epsilon}$
 
-* **`h_simulate.m`** simulates a long random walk (of length $10^9$) of standard Gaussian steps and sweeps an integer $m$-grid (from 1 to 90). For each $m$, it computes
+* **`h_simulate.m`** simulates a long standard-Gaussian random walk (length $10^9$) and sweeps an integer $m$-grid (e.g., $1$ to $90$). For each $m$ it computes
   $\mu_2(m)=\mathbb{E}[(r^{(m)})^2]$ and
-  $\mu_{2,\epsilon}(m)=\mathbb{E}[\{(r^{(m)}\wedge m(1+\epsilon))^2\}]$ (for $\epsilon$ from 0.01 to 1.00),
+  $\mu_{2,\epsilon}(m)=\mathbb{E}[\{(r^{(m)}\wedge m(1+\epsilon))^2\}]$ for $\epsilon \in [0.01,1.00]$,
   then tabulates $h_{2}(m)=\mu_2(m)/m^2$ and $h_{2,\epsilon}(m)=\mu_{2,\epsilon}(m)/m^2$.
 
 * **Derivatives.** `h_first_derivative.m` estimates $h_2'(m)$ and $h_{2,\epsilon}'(m)$ by local-linear regression around each grid point of $m$, which feed the delta-method variance.
 
-* **Variance function.** The script also computes the needed variance and covariance terms for $(M_c,M_{c,\epsilon})$ (denoted $v$, $v_{\epsilon}$, $c_{\epsilon}$ in the code) and assembles $V_{\epsilon}(m)$. The saved file `avar_r.mat` stores $V_{\epsilon}(m)$ across the same $m$-grid.
+* **Variance function.** The script computes the variance and covariance terms for $(M_c, \overline M_{c,\epsilon})$ (denoted $v$, $v_{\epsilon}$, $c_{\epsilon}$ in code) and assembles $V_{\epsilon}(m)$. The file `avar_r.mat` stores $V_{\epsilon}(m)$ on the same $m$-grid.
 
 ---
 
