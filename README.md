@@ -1,11 +1,11 @@
-## Testing for Jumps in a Discretely Observed Price Process with Endogenous Sampling Times
+# 📄 Testing for Jumps in a Discretely Observed Price Process with Endogenous Sampling Times
 
 This repository contains the MATLAB code and simulation examples for **“Testing for Jumps in a Discretely Observed Price Process with Endogenous Sampling Times.”**
 You can find the latest draft and supplemental materials on [the author’s website](https://www.shifanyu.com/).
 
 ---
 
-## <img src="docs/icons/whats-inside.svg" alt="" width="18"> What’s inside
+## 🔍 What’s inside
 
 * **Test statistic (`testLLNNY.m`)**:
 Constructs the test statistic from the empirical quantities $M_{c}$ and $\overline M_{c,\epsilon}$ by inverting the tabulated maps $h_{2}(m)$ and $h_{2,\epsilon}(m)$ to obtain the implied barriers $\widehat m$ and $\widehat m_{\epsilon}$. The statistic then uses the precomputed variance function $V_{\epsilon}(m)$ on the same $m$-grid.
@@ -24,7 +24,7 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $\overli
 
 ---
 
-## <img src="docs/icons/layout.svg" alt="" width="18"> Package layout
+## 📦 Package layout
 
 * **`numerical_h_hbar/` — Reproduce the function tables**
 
@@ -54,7 +54,7 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $\overli
 
 ---
 
-## <img src="docs/icons/steps.svg" alt="" width="18"> Step-by-step: how `testLLNNY.m` constructs the statistic
+## 🛠️ Step-by-step: how `testLLNNY.m` constructs the statistic
 
 1. **Choose a working barrier $c$.**
    In finite samples, set $c$ as $K$ times the standard deviation of tick-by-tick returns. Under microstructure noise, construct the sequence of pseudo-observations with selected pre-averaging windows with `wb_preaveraging`, then set $c$ from the pre-averaged returns:
@@ -63,7 +63,7 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $\overli
    c    = K * sqrt(var(diff(X_pa), 1));
    ```
 
-3. **Compute $M_c$ and $M_{c,\epsilon}$.**
+3. **Compute $M_c$ and $\overline M_{c,\epsilon}$.**
    Use `ret_delta(X,c)` to extract $r^{(c)}$, then form the two empirical moments in `testLLNNY`.
 
 4. **Invert $h_2$ and $h_{2,\epsilon}$.**
@@ -77,7 +77,7 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $\overli
 
 ---
 
-## <img src="docs/icons/tables.svg" alt="" width="18"> Reproducing the tables $h_{2}$, $h_{2,\epsilon}$, $V_{\epsilon}$
+## 🗄️ Reproducing the tables $h_{2}$, $h_{2,\epsilon}$, $V_{\epsilon}$
 
 * **`h_simulate.m`** simulates a long standard-Gaussian random walk (length $10^9$) and sweeps an integer $m$-grid (e.g., $1$ to $90$). For each $m$ it computes
   $\mu_2(m)=\mathbb{E}[(r^{(m)})^2]$ and
@@ -90,7 +90,7 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $\overli
 
 ---
 
-## <img src="docs/icons/montecarlo.svg" alt="" width="18"> Monte Carlo simulations
+## 📈 Monte Carlo simulations
 
 * **Null:** $X = X^{c}$. Diffusion; optionally with noise in price observations.
 * **Alternatives:** $X = X^{c} + X^{d}$. $X^{d}$ is a compound Poisson process with rate $\lambda$ and double-exponential (Laplace) jump sizes (location 0, scale $\beta$).
@@ -100,6 +100,6 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $\overli
 
 ---
 
-## <img src="docs/icons/reference.svg" alt="" width="18"> Reference
+## 📚 Reference
 
 Li, Q., Li, Y., Nolte, I., Nolte, S., and Yu, S. (2025). Testing for jumps in a discretely observed price process with endogenous sampling times. Working Paper.
