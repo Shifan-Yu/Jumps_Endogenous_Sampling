@@ -1,4 +1,4 @@
-# 📄 Testing for Jumps in a Discretely Observed Price Process with Endogenous Sampling Times
+# Testing for Jumps in a Discretely Observed Price Process with Endogenous Sampling Times
 
 This repository contains the MATLAB code and simulation examples for **“Testing for Jumps in a Discretely Observed Price Process with Endogenous Sampling Times.”**
 You can find the latest draft and supplemental materials on [the author’s website](https://www.shifanyu.com/).
@@ -102,4 +102,4 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $\overli
 
 ## 📚 Reference
 
-Li, Q., Li, Y., Nolte, I., Nolte, S., and Yu, S. (2025). Testing for jumps in a discretely observed price process with endogenous sampling times. Working Paper.
+Li, Q., Li, Y., Nolte, I., Nolte, S., and Yu, S. (2025). *Testing for Jumps in a Discretely Observed Price Process with Endogenous Sampling Times.* Working Paper.
