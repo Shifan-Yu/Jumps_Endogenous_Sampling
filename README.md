@@ -8,7 +8,7 @@ You can find the latest draft and supplemental materials on [the author’s webs
 ## 🔍 What’s inside
 
 * **Test statistic (`testLLNNY.m`)**:
-Constructs the test statistic from the empirical quantities $M_{c}$ and $\overline M_{c,\epsilon}$ by inverting the tabulated maps $h_{2}(m)$ and $h_{2,\epsilon}(m)$ to obtain the implied barriers $\widehat m$ and $\widehat m_{\epsilon}$. The statistic then uses the precomputed variance function $V_{\epsilon}(m)$ on the same $m$-grid.
+Constructs the test statistic from the empirical quantities $S_{2}$ and $\overline S_{2,\epsilon}$ by inverting the tabulated maps $h_{2}(m)$ and $h_{2,\epsilon}(m)$ to obtain the implied barriers $\widehat m$ and $\widehat m_{\epsilon}$. The statistic then uses the precomputed variance function $V_{\epsilon}(m)$ on the same $m$-grid.
 
 * **Precomputed tables**:
 
@@ -63,7 +63,7 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $\overli
    c    = K * sqrt(var(diff(X_pa), 1));
    ```
 
-3. **Compute $M_c$ and $\overline M_{c,\epsilon}$.**
+3. **Compute quantities $S_{2}$ and $\overline S_{2,\epsilon}$.**
    Use `ret_delta(X,c)` to extract $r^{(c)}$, then form the two empirical moments in `testLLNNY`.
 
 4. **Invert $h_2$ and $h_{2,\epsilon}$.**
