@@ -36,7 +36,7 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $M_{c,\e
 * **`testToolbox/` — Test statistic and helper functions**
 
   * `testLLNNY.m`: builds the test statistic from implied barriers and $V_{\epsilon}$
-  * `invFunc.m`: robust monotone inverse on tabulated $[m, Y(m)]$
+  * `invFunc.m`: robust monotone inverse of tabulated $[m, Y(m)]$
   * `linearInt.m`: clamped `interp1` wrapper for table lookup
   * `ret_delta.m`: price duration (barrier-hitting) sampling
   * `finddata.m`: slice $\epsilon$-specific columns to two-column tables
@@ -76,14 +76,14 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $M_{c,\e
 
 ## Reproducing the tables $h_{2}$, $h_{2,\epsilon}$, $V_{\epsilon}$
 
-* **`h_simulate.m`** simulates a long random walk (of length $10^9$) of standard Gaussian steps and sweeps an $m$-grid. For each $m$, it computes
+* **`h_simulate.m`** simulates a long random walk (of length $10^9$) of standard Gaussian steps and sweeps an integer $m$-grid (from 1 to 90). For each $m$, it computes
   $\mu_2(m)=\mathbb{E}[(r^{(m)})^2]$ and
-  $\mu_{2,\epsilon}(m)=\mathbb{E}[\{(r^{(m)}\wedge m(1+\epsilon))^2\}]$,
+  $\mu_{2,\epsilon}(m)=\mathbb{E}[\{(r^{(m)}\wedge m(1+\epsilon))^2\}]$ (for $\epsilon$ from 0.01 to 1.00),
   then tabulates $h_{2}(m)=\mu_2(m)/m^2$ and $h_{2,\epsilon}(m)=\mu_{2,\epsilon}(m)/m^2$.
 
 * **Derivatives.** `h_first_derivative.m` estimates $h_2'(m)$ and $h_{2,\epsilon}'(m)$ by local-linear regression around each grid point of $m$, which feed the delta-method variance.
 
-* **Variance function.** The script also computes the needed variance and covariance terms for $(M_c,M_{c,\epsilon})$ (denoted $v$, $v_{\epsilon}$, $c_{\epsilon}$ in the code) and assembles $V_{\epsilon}(m)$. The saved file `avar_r.mat` stores $V_{\epsilon}(m)$ across the same grid.
+* **Variance function.** The script also computes the needed variance and covariance terms for $(M_c,M_{c,\epsilon})$ (denoted $v$, $v_{\epsilon}$, $c_{\epsilon}$ in the code) and assembles $V_{\epsilon}(m)$. The saved file `avar_r.mat` stores $V_{\epsilon}(m)$ across the same $m$-grid.
 
 ---
 
@@ -94,26 +94,3 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $M_{c,\e
 * **Barrier choice per path:** $c_i = K \sqrt{\mathrm{Var}(\Delta_{i}^{n}X)}$. With noise, construct the sequence of pseudo-observations with selected pre-averaging windows with `wb_preaveraging`, then set $c$ based on pre-averaged returns
 * **Power reporting:** condition on paths with at least one jump ($N>0$).
 * **Size-adjusted power:** compare to the empirical 95th percentile from the null for each $K$.
-
----
-
-## Helper functions (brief)
-
-* `testLLNNY(X, c, eps, H2_tab, H2eps_tab, Veps_tab)` → `[Z_eps, m_hat_eps, m_hat, N_c]`
-  Builds $M_c$ and $M_{c,\epsilon}$, inverts to $\widehat m,\widehat m_{\epsilon}$, looks up $V_{\epsilon}(\widehat m_{\epsilon})$, and returns $Z_{\epsilon}$.
-
-* `finddata(eps, h_eps_vec, avar_r)`
-  From wide matrices across $\epsilon$, extract two-column tables $[m, h_{2,\epsilon}(m)]$ and $[m, V_{\epsilon}(m)]$.
-
-* `invFunc(Y_trial, [m, Y(m)])`
-  Robust monotone inverse of a **decreasing** tabulated map.
-
-* `linearInt(x, [xgrid, ygrid], method)`
-  Clamped `interp1` lookup (default `'linear'`).
-
-* `ret_delta(price, m)`
-  Barrier-hitting (first-passage) returns $r^{(m)}$.
-
-* `wb_preaveraging(x, kn, 'flip',bool,'perm',bool)`
-  Pre-averaged path and, if requested, wild-bootstrapped pseudo path (sign-flip + permutation).
-  `pseudo.m` returns the pre-averaged levels only.
