@@ -57,20 +57,33 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $M_{c,\e
 ## Workflow
 
 1. **Choose a working barrier $c$.**
-   In finite samples we set $c$ as $K$ times the standard deviation of tick-by-tick returns. Under microstructure noise, we construct the sequence of pseudo-observations with selected pre-averaging windows with `wb_preaveraging.m`, then set $c$ based on pre-averaged returns.
-   `X_pa = wb_preaveraging(X, round(0.5*sqrt(n)));  c = K*sqrt(var(diff(X_pa),1));`
+   In finite samples we set $c$ as $K$ times the standard deviation of tick-by-tick returns. Under microstructure noise, we construct the sequence of pseudo-observations with selected pre-averaging windows with `wb_preaveraging`, then set $c$ based on pre-averaged returns, e.g., `X_pa = wb_preaveraging(X, round(0.5*sqrt(n))); c = K*sqrt(var(diff(X_pa),1));`
+
+2. **Compute $M_c$ and $M_{c,\epsilon}$.**
+   Use `ret_delta(X,c)` to extract $r^{(c)}$, then form the two empirical moments in `testLLNNY`.
+
+3. **Invert $h_2$ and $h_{2,\epsilon}$.**
+   With `H2_tab = [m,h_2(m)]` and `H2eps_tab = [m,h_{2,\epsilon}(m)]` (`finddata(eps, h_eps_vec, avar_r)` returns two-column tables for the chosen $\epsilon$), `invFunc` returns $\widehat m$ and $\widehat m_{\epsilon}$.
+
+4. **Evaluate $V_{\epsilon}$ at $\widehat m_{\epsilon}$.**
+   `linearInt` performs the lookup to get $V_{\epsilon}(\widehat m_{\epsilon})$.
+
+5. **Construct $T_{c,\epsilon}$ and test.**
+   Under the null, $T_{c,\epsilon}$ is asymptotically standard normal. For Monte Carlo size-adjusted power, compare to the empirical 95th percentile from the null for each $K$.
 
 
 ---
 
 ## Reproducing the tables $h_{2}$, $h_{2,\epsilon}$, $V_{\epsilon}$
 
-1. Simulate a long Gaussian random walk and, for each grid value $m$, compute $h_{2}(m)$ and $h_{2,\epsilon}(m)$ (censoring at $m(1+\epsilon)$).
-2. Estimate $h'_{2}(m)$ and $h'_{2,\epsilon}(m)$ with local-linear slopes (`h_first_derivative.m`).
-3. Assemble the variance function $V_{\epsilon}(m)$ via the delta-method expressions.
-4. Save `h_vec.mat`, `h_eps_vec.mat`, `avar_r.mat`.
+* **`h_simulate.m`** simulates a long Gaussian random walk (of length $10^9$) and sweeps an $m$-grid. For each $m$, it computes
+  $\mu_2(m)=\mathbb{E}[(r^{(m)})^2]$ and
+  $\mu_{2,\epsilon}(m)=\mathbb{E}[\min\{(r^{(m)})^2,(m(1+\epsilon))^2\}]$,
+  then tabulates $h_{2}(m)=\mu_2(m)/m^2$ and $h_{2,\epsilon}(m)=\mu_{2,\epsilon}(m)/m^2$.
 
-> Assumptions for inversion: the maps are **monotone decreasing** and smooth on the grid. `invFunc.m` combines a tail quadratic (on $\mu_2$) and a local inverse quadratic (in $1/m$) with a monotone interpolation fallback.
+* **Derivatives.** `h_first_derivative.m` estimates $h_2'(m)$ and $h_{2,\epsilon}'(m)$ by local-linear regression around each grid point of $m$, which feed the delta-method variance.
+
+* **Variance function.** The script also computes the needed variance and covariance terms for $(M_c,M_{c,\epsilon})$ (denoted $v$, $v_{\epsilon}$, $c_{\epsilon}$ in the code) and assembles $V_{\epsilon}(m)$. The saved file `avar_r.mat` stores $V_{\epsilon}(m)$ across the same grid.
 
 ---
 
