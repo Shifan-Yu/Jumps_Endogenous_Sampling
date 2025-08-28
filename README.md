@@ -8,7 +8,7 @@ You can find the latest draft and supplemental materials on [the author’s webs
 ## What’s inside
 
 * **Test statistic (`testLLNNY.m`)**:
-Constructs the test statistic from the empirical quantities $M_{c}$ and $M_{c,\epsilon}$ by inverting the tabulated maps $h_{2}(m)$ and $h_{2,\epsilon}(m)$ to obtain the implied barriers $\widehat m$ and $\widehat m_{\epsilon}$. The statistic then uses the precomputed variance function $V_{\epsilon}(m)$ on the same $m$-grid.
+Constructs the test statistic from the empirical quantities $M_{c}$ and $\overline M_{c,\epsilon}$ by inverting the tabulated maps $h_{2}(m)$ and $h_{2,\epsilon}(m)$ to obtain the implied barriers $\widehat m$ and $\widehat m_{\epsilon}$. The statistic then uses the precomputed variance function $V_{\epsilon}(m)$ on the same $m$-grid.
 
 * **Precomputed tables**:
 
@@ -92,9 +92,9 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $M_{c,\e
 
 ## Monte Carlo usage
 
-* **Null:** $X = X^{c}$ (diffusion; optionally with noise in price observations).
-* **Alternatives:** $X = X^{c} + X^{d}$. $X^{d}$ follows a compound Poisson process with rate $\lambda$, and jump sizes follow a double exponential distribution (Laplace distribution) with location parameter 0 and scale parameter $\beta$.
-* **Barrier choice per path:** $c_i = K \sqrt{\mathrm{Var}(\Delta_{i}^{n}X)}$. With noise, construct the sequence of pseudo-observations with selected pre-averaging windows with `wb_preaveraging`, then set $c$ based on pre-averaged returns
+* **Null:** $X = X^{c}$. Diffusion; optionally with noise in price observations.
+* **Alternatives:** $X = X^{c} + X^{d}$. $X^{d}$ is a compound Poisson process with rate $\lambda$ and double-exponential (Laplace) jump sizes (location 0, scale $\beta$).
+* **Barrier choice per path:** $c_i = K \sqrt{\mathrm{Var}(\Delta_i^n X)}$. With noise, use `wb_preaveraging` to build pseudo-observations and set $c$ from pre-averaged returns.
 * **Power reporting:** condition on paths with at least one jump ($N>0$).
 * **Size-adjusted power:** compare to the empirical 95th percentile from the null for each $K$.
 
@@ -102,4 +102,4 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $M_{c,\e
 
 ## Reference
 
-
+Li, Q., Li, Y., Nolte, I., Nolte, S., and Yu, S. (2025). Testing for jumps in a discretely observed price process with endogenous sampling times. Working Paper.
