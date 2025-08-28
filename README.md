@@ -76,7 +76,7 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $M_{c,\e
 
 ## Reproducing the tables $h_{2}$, $h_{2,\epsilon}$, $V_{\epsilon}$
 
-* **`h_simulate.m`** simulates a long Gaussian random walk (of length $10^9$) and sweeps an $m$-grid. For each $m$, it computes
+* **`h_simulate.m`** simulates a long random walk (of length $10^9$) of standard Gaussian steps and sweeps an $m$-grid. For each $m$, it computes
   $\mu_2(m)=\mathbb{E}[(r^{(m)})^2]$ and
   $\mu_{2,\epsilon}(m)=\mathbb{E}[\{(r^{(m)}\wedge m(1+\epsilon))^2\}]$,
   then tabulates $h_{2}(m)=\mu_2(m)/m^2$ and $h_{2,\epsilon}(m)=\mu_{2,\epsilon}(m)/m^2$.
@@ -89,11 +89,11 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $M_{c,\e
 
 ## Monte Carlo usage
 
-* **Null:** $X = X^{c}$ (diffusion; optionally with noise in levels).
-* **Alternatives:** $X = X^{c} + X^{d}$ (compound Laplace jump levels).
-* **Barrier choice per path:** $c_i = K \sqrt{\mathrm{Var}(\Delta X_i)}$. With noise, you may pre-average **only to compute $c_i$**.
+* **Null:** $X = X^{c}$ (diffusion; optionally with noise in price observations).
+* **Alternatives:** $X = X^{c} + X^{d}$. $X^{d}$ follows a compound Poisson process with rate $\lambda$, and jump sizes follow a double exponential distribution (Laplace distribution) with location parameter 0 and scale parameter $\beta$.
+* **Barrier choice per path:** $c_i = K \sqrt{\mathrm{Var}(\Delta_{i}^{n}X)}$. With noise, construct the sequence of pseudo-observations with selected pre-averaging windows with `wb_preaveraging`, then set $c$ based on pre-averaged returns
 * **Power reporting:** condition on paths with at least one jump ($N>0$).
-* **Size-adjusted power:** compare to the **empirical** 95th percentile from the null **for each $K$**.
+* **Size-adjusted power:** compare to the empirical 95th percentile from the null for each $K$.
 
 ---
 
