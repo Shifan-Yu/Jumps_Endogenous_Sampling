@@ -2,7 +2,7 @@ function [test, m_hat_eps, m_hat, N_c] = testLLNNY(price, c, epsilon, H2_tab, H2
 % testLLNNY — Test statistic with implied barriers from h_2(m) and h_2,eps(m)
 % -----------------------------------------------------------------------------------
 %   • Path X by 'price'.
-%   • Barrier c (here: 'delta' input) defines PDS hits and returns r^{(c)}.
+%   • Barrier c determines PDS hits and returns r^{(c)}.
 %   • h_2(m)   = E[(r^{(c)})^2] / c^2.
 %   • h_2,ε(m) = E[ min{ (r^{(c)})^2, (c(1+ε))^2 } ] / c^2.
 %   • Tables provided on an m-grid (two columns): 
@@ -51,3 +51,4 @@ function [test, m_hat_eps, m_hat, N_c] = testLLNNY(price, c, epsilon, H2_tab, H2
     test = (m_hat_eps / m_hat - 1) / sqrt( max(realmin, AVAR_m) / n );
 
 end
+
