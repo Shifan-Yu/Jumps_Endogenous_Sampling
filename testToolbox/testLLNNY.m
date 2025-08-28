@@ -8,7 +8,7 @@ function [test, m_hat_eps, m_hat, N_c] = testLLNNY(price, c, epsilon, H2_tab, H2
 %   • Tables provided on an m-grid (two columns): 
 %       H2_tab   = [m_grid, h_2(m_grid)]
 %       Heps_tab = [m_grid, h^ε(m_grid)]     (for the SAME ε)
-%       AVAR_R   = [m_grid, AVAR(m_grid)]  (right-scaled AVAR for the SAME ε)
+%       AVAR     = [m_grid, AVAR(m_grid)]    (Asymptotic variance for the SAME ε)
 %
 % Steps:
 %   1) Extract PDS returns at c: r^{(c)} and compute squared returns r2.
@@ -49,4 +49,5 @@ function [test, m_hat_eps, m_hat, N_c] = testLLNNY(price, c, epsilon, H2_tab, H2
     % LLNNY statistic
     n = length(price);
     test = (m_hat_eps / m_hat - 1) / sqrt( max(realmin, AVAR_m) / n );
+
 end
