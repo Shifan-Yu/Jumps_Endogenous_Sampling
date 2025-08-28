@@ -1,5 +1,5 @@
 function m_hat = invFunc(Y_trial, mY_table)
-% invFunc  Robust monotone inverse for tabulated Y(m) (e.g., h_2 or h^ε).
+% invFunc  Robust monotone inverse for tabulated Y(m) (e.g., h_2(m) or h_2,ε(m)).
 % ------------------------------------------------------------------------------
 % Given Y_trial and a two-column table mY_table=[m_grid, Y_grid] with Y ↓ in m,
 % return m_hat s.t. Y(m_hat) ≈ Y_trial.
@@ -101,3 +101,4 @@ function m_hat = invFunc(Y_trial, mY_table)
 
     m_hat = 1 / u_hat;                        % back-transform
 end
+
