@@ -90,7 +90,6 @@ for m = 1:numel(K_all)
         xi_path = wb_preaveraging(x1(:,i), kn); % pre-averaged path
         dX = diff(xi_path);
         c_i = K * sqrt(var(dX, 1));
-
         [Zi, ~, ~, ~] = testLLNNY(xi_path, c_i, eps, H2_tab, H2eps_tab, AVAR_tab);
         Z_A(j,m) = Zi;
     end
@@ -112,7 +111,6 @@ for m = 1:numel(K_all)
         xi_path = wb_preaveraging(x2(:,i), kn); % pre-averaged path
         dX = diff(xi_path);
         c_i = K * sqrt(var(dX, 1));
-
         [Zi, ~, ~, ~] = testLLNNY(xi_path, c_i, eps, H2_tab, H2eps_tab, AVAR_tab);
         Z_B(j,m) = Zi;
     end
@@ -131,3 +129,4 @@ for m = 1:numel(K_all)
     fprintf('%4.0f   %8.4f   %11.4f   %12.4f   %10.0f\n', ...
         K, size_rate(m), power_mild(m), power_large(m), Nc);
 end
+
