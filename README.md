@@ -86,7 +86,7 @@ Constructs the test statistic from the empirical quantities $S_{2}$ and $\overli
 
 * **Derivatives.** `h_first_derivative.m` estimates $h_2'(m)$ and $h_{2,\epsilon}'(m)$ by local-linear regression around each grid point of $m$, which feed the delta-method variance.
 
-* **Variance function.** The script computes the variance and covariance terms for $(M_c, \overline M_{c,\epsilon})$ (denoted $v$, $v_{\epsilon}$, $c_{\epsilon}$ in code) and assembles $V_{\epsilon}(m)$. The file `avar_r.mat` stores $V_{\epsilon}(m)$ on the same $m$-grid.
+* **Variance function.** The script computes the variance and covariance terms (denoted $v$, $v_{\epsilon}$, $c_{\epsilon}$ in code) and assembles $V_{\epsilon}(m)$. The file `avar_r.mat` stores $V_{\epsilon}(m)$ on the same $m$-grid.
 
 ---
 
