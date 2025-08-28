@@ -7,7 +7,7 @@ clearvars; clc;
 %    dX^c_t =  mu dt + sqrt(v_t) dW^x_t,  
 %    dv_t = kappa(theta - v_t)dt + xi sqrt(v_t) dW^v_t,
 %    Corr(dW^x, dW^v) = rho,
-%    X^d is stepwise with Bernoulli(λ/num) arrivals and Laplace(0,β) jump sizes.
+%    X^d is stepwise with Poisson arrivals and Laplace(0,β) jump sizes.
 % -------------------------------------------------------------------------
 rep         = 500;             % # Monte Carlo paths (columns)
 num         = 23400;           % points over [0,1]
@@ -127,3 +127,4 @@ for m = 1:numel(K_all)
     fprintf('%4.0f   %8.4f   %11.4f   %12.4f   %10.0f\n', ...
         K, size_rate(m), power_mild(m), power_large(m), Nc);
 end
+
