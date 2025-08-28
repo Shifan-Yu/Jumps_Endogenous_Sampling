@@ -81,8 +81,8 @@ Constructs the test statistic from the empirical quantities $S_{2}$ and $\overli
 ## Reproducing the tables $h_{2}$, $h_{2,\epsilon}$, $V_{\epsilon}$
 
 * **`h_simulate.m`** simulates a long standard-Gaussian random walk (length $10^9$) and sweeps an integer $m$-grid (e.g., $1$ to $90$). For each $m$ it computes
-  $\mu_2(m)=\mathbb{E}[(r^{(m)})^2]$ and
-  $\mu_{2,\epsilon}(m)=\mathbb{E}[\{(r^{(m)}\wedge m(1+\epsilon))^2\}]$ for $\epsilon \in [0.01,1.00]$,
+  $\mu_2(m)=\mathbb{E}[(Z_{1}^{(m)})^2]$ and
+  $\mu_{2,\epsilon}(m)=\mathbb{E}[\{(Z_{1}^{(m)}\wedge m(1+\epsilon))^2\}]$ for $\epsilon \in [0.01,1.00]$,
   then tabulates $h_{2}(m)=\mu_2(m)/m^2$ and $h_{2,\epsilon}(m)=\mu_{2,\epsilon}(m)/m^2$.
 
 * **Derivatives.** `h_first_derivative.m` estimates $h_2'(m)$ and $h_{2,\epsilon}'(m)$ by local-linear regression around each grid point of $m$, which feed the delta-method variance.
