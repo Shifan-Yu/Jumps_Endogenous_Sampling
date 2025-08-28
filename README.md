@@ -8,7 +8,7 @@ You can find the latest draft and supplemental materials on the author’s websi
 ## What’s inside
 
 * **Test statistic (`testLLNNY.m`)**:
-Constructs the test statistic from the implied barriers $\widehat m$ and $\widehat m_{\epsilon}$ by inverting the functions $h_{2}(m)$ and $h_{2,\epsilon}(m)$.
+Constructs the test statistic from the empirical quantities $M_{c}$ and $M_{c,\epsilon}$ by inverting the tabulated maps $h_{2}(m)$ and $h_{2,\epsilon}(m)$ to obtain the implied barriers $\widehat m$ and $\widehat m_{\epsilon}$. The statistic uses the precomputed variance function $V_{\epsilon}(m)$ on the same barrier grid.
 
 * **Precomputed tables**:
 
@@ -30,7 +30,7 @@ Constructs the test statistic from the implied barriers $\widehat m$ and $\wideh
 
   * `h_simulate.m`: compute $h_{2}$, $h_{2,\epsilon}$, first-order derivatives, and $V_{\epsilon}$ on an $m$ grid
   * `h_first_derivative.m`: local-linear slope estimator of $h'(m)$
-  * `ret_delta.m`: Price duration sampled (barrier-hitting) returns $r^{(c)}$
+  * `ret_delta.m`: price duration sampled (barrier-hitting) returns $r^{(c)}$
   * `h_vec.mat`, `h_eps_vec.mat`, `avar_r.mat`: saved tables used by the test
 
 * **`testToolbox/` — Test statistic and helper functions**
@@ -46,11 +46,20 @@ Constructs the test statistic from the implied barriers $\widehat m$ and $\wideh
 
   * `simulatePrices/`
 
-    * `simPriceEfficient.m`: Heston + Jumps
-    * `simPriceNoise_autoGau_t.m`: Heston + Jumps + Microstructure Noise
+    * `simPriceEfficient.m`: Heston + jumps
+    * `simPriceNoise_autoGau_t.m`: Heston + jumps + microstructure noise
     * `MA_noise.m`, `rounding.m`, `randLaplace.m`: Helper functions for microstructure noise simulation
   * `mainNoNoise.m`: empirical size & power without microstructure noise
   * `mainWithNoise.m`: empirical size & power with noise (with pre-averaging)
+
+---
+
+## Workflow
+
+1. **Choose a working barrier $c$.**
+   In finite samples we set $c$ as $K$ times the standard deviation of tick-by-tick returns. Under microstructure noise, we construct the sequence of pseudo-observations with selected pre-averaging windows with `wb_preaveraging.m`, then set $c$ based on pre-averaged returns.
+   `X_pa = wb_preaveraging(X, round(0.5*sqrt(n)));  c = K*sqrt(var(diff(X_pa),1));`
+
 
 ---
 
