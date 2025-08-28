@@ -31,7 +31,7 @@ beta2       = 0.4*sqrt(theta);          % larger jumps
 x2 = xc + xd2;                          % larger-jump alternative
 
 %% ------------------------------------------------------------------------
-%  Barrier family: c_i = K * sqrt(Var(ΔX_i))
+%  Barrier family: c_i = K * sqrt(Var(Δ_i^n X))
 % -------------------------------------------------------------------------
 
 K_all = (3:1:10)';               % grid of barrier scalings K
@@ -127,4 +127,5 @@ for m = 1:numel(K_all)
     fprintf('%4.0f   %8.4f   %11.4f   %12.4f   %10.0f\n', ...
         K, size_rate(m), power_mild(m), power_large(m), Nc);
 end
+
 
