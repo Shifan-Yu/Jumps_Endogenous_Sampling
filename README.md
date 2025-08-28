@@ -17,7 +17,7 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $\overli
   * `avar_r.mat`: wide table across $\epsilon$ with $[m\; V_{\epsilon}(m)]$
 
 * **Simulators**:
-  Heston model for the efficient price observed at tick level. Jumps can be added with user-selected intensities and scales. An option with market microstructure noise (autocorrelated Gaussian–$t$ mixture and rounding) is included.
+  Heston model for the efficient price observed at tick level. Jumps can be added with user-selected intensities and scales. An option with market microstructure noise (autocorrelated Gaussian–t mixture and rounding) is included.
 
 * **Monte Carlo examples**:
   Empirical size and size-adjusted power across working barrier widths $c$ and censoring parameters $\epsilon$.
