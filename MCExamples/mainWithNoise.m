@@ -7,7 +7,7 @@ clearvars; clc;
 %    dX^c_t =  mu dt + sqrt(v_t) dW^x_t,  
 %    dv_t = kappa(theta - v_t)dt + xi sqrt(v_t) dW^v_t,
 %    Corr(dW^x, dW^v) = rho,
-%    X^d is stepwise with Bernoulli(λ/num) arrivals and Laplace(0,β) jump sizes.
+%    X^d is stepwise with Poisson arrivals and Laplace(0,β) jump sizes.
 % -------------------------------------------------------------------------
 rep         = 500;             % # Monte Carlo paths (columns)
 num         = 23400;           % points over [0,1]
@@ -35,7 +35,7 @@ r           = 1;                        % rounding flag
 x2 = xc + xd2;                          % larger-jump alternative
 
 %% ------------------------------------------------------------------------
-%  Barrier family: c_i = K * sqrt(Var(ΔX_i))
+%  Barrier family: c_i = K * sqrt(Var(Δ_i^n X))
 % -------------------------------------------------------------------------
 
 K_all = (3:1:10)';               % grid of barrier scalings K
@@ -129,4 +129,5 @@ for m = 1:numel(K_all)
     fprintf('%4.0f   %8.4f   %11.4f   %12.4f   %10.0f\n', ...
         K, size_rate(m), power_mild(m), power_large(m), Nc);
 end
+
 
