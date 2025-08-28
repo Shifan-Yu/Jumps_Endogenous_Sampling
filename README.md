@@ -30,7 +30,7 @@ Constructs the test statistic from the empirical quantities $S_{2}$ and $\overli
 
   * `h_simulate.m`: compute $h_{2}$, $h_{2,\epsilon}$, first-order derivatives, and $V_{\epsilon}$ on an $m$-grid
   * `h_first_derivative.m`: local-linear slope estimator of $h'(m)$
-  * `ret_delta.m`: price duration (barrier-hitting) sampled returns $r^{(c)}$
+  * `ret_delta.m`: price duration (barrier-hitting) sampling
   * `h_vec.mat`, `h_eps_vec.mat`, `avar_r.mat`: saved tables used by the test
 
 * **`testToolbox/` — Test statistic and helper functions**
@@ -41,6 +41,7 @@ Constructs the test statistic from the empirical quantities $S_{2}$ and $\overli
   * `ret_delta.m`: price duration (barrier-hitting) sampling
   * `finddata.m`: slice $\epsilon$-specific columns to two-column tables
   * `wb_preaveraging.m`: wild-bootstrapped preaveraging
+  * * `h_vec.mat`, `h_eps_vec.mat`, `avar_r.mat`: saved tables used by the test
 
 * **`MCExamples/` — Monte Carlo examples**
 
