@@ -5,7 +5,7 @@ You can find the latest draft and supplemental materials on [the author’s webs
 
 ---
 
-## 🔍 What’s inside
+## What’s inside
 
 * **Test statistic (`testLLNNY.m`)**:
 Constructs the test statistic from the empirical quantities $S_{2}$ and $\overline S_{2,\epsilon}$ by inverting the tabulated maps $h_{2}(m)$ and $h_{2,\epsilon}(m)$ to obtain the implied barriers $\widehat m$ and $\widehat m_{\epsilon}$. The statistic then uses the precomputed variance function $V_{\epsilon}(m)$ on the same $m$-grid.
@@ -24,7 +24,7 @@ Constructs the test statistic from the empirical quantities $S_{2}$ and $\overli
 
 ---
 
-## 📦 Package layout
+## Package layout
 
 * **`numerical_h_hbar/` — Reproduce the function tables**
 
@@ -55,7 +55,7 @@ Constructs the test statistic from the empirical quantities $S_{2}$ and $\overli
 
 ---
 
-## 🛠️ Step-by-step: how `testLLNNY.m` constructs the statistic
+## Step-by-step: how `testLLNNY.m` constructs the statistic
 
 1. **Choose a working barrier $c$.**
    In finite samples, set $c$ as $K$ times the standard deviation of tick-by-tick returns. Under microstructure noise, construct the sequence of pseudo-observations with selected pre-averaging windows with `wb_preaveraging`, then set $c$ from the pre-averaged returns:
@@ -78,7 +78,7 @@ Constructs the test statistic from the empirical quantities $S_{2}$ and $\overli
 
 ---
 
-## 🗄️ Reproducing the tables $h_{2}$, $h_{2,\epsilon}$, $V_{\epsilon}$
+## Reproducing the tables $h_{2}$, $h_{2,\epsilon}$, $V_{\epsilon}$
 
 * **`h_simulate.m`** simulates a long standard-Gaussian random walk (length $10^9$) and sweeps an integer $m$-grid (e.g., $1$ to $90$). For each $m$ it computes
   $\mu_2(m)=\mathbb{E}[(r^{(m)})^2]$ and
@@ -91,7 +91,7 @@ Constructs the test statistic from the empirical quantities $S_{2}$ and $\overli
 
 ---
 
-## 📈 Monte Carlo simulations
+## Monte Carlo simulations
 
 * **Null:** $X = X^{c}$. Diffusion; optionally with noise in price observations.
 * **Alternatives:** $X = X^{c} + X^{d}$. $X^{d}$ is a compound Poisson process with rate $\lambda$ and double-exponential (Laplace) jump sizes (location 0, scale $\beta$).
@@ -101,6 +101,6 @@ Constructs the test statistic from the empirical quantities $S_{2}$ and $\overli
 
 ---
 
-## 📚 Reference
+## Reference
 
 Li, Q., Li, Y., Nolte, I., Nolte, S., and Yu, S. (2025). *Testing for Jumps in a Discretely Observed Price Process with Endogenous Sampling Times.* Working Paper.
