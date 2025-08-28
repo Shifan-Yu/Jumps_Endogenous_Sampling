@@ -78,7 +78,7 @@ Constructs the test statistic from the empirical quantities $M_{c}$ and $M_{c,\e
 
 * **`h_simulate.m`** simulates a long Gaussian random walk (of length $10^9$) and sweeps an $m$-grid. For each $m$, it computes
   $\mu_2(m)=\mathbb{E}[(r^{(m)})^2]$ and
-  $\mu_{2,\epsilon}(m)=\mathbb{E}[\min\{(r^{(m)})^2,(m(1+\epsilon))^2\}]$,
+  $\mu_{2,\epsilon}(m)=\mathbb{E}[\{(r^{(m)}\wedge m(1+\epsilon))^2\}]$,
   then tabulates $h_{2}(m)=\mu_2(m)/m^2$ and $h_{2,\epsilon}(m)=\mu_{2,\epsilon}(m)/m^2$.
 
 * **Derivatives.** `h_first_derivative.m` estimates $h_2'(m)$ and $h_{2,\epsilon}'(m)$ by local-linear regression around each grid point of $m$, which feed the delta-method variance.
