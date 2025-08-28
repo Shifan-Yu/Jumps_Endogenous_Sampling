@@ -42,7 +42,7 @@ Constructs the test statistic from the empirical quantities $S_{2}$ and $\overli
   * `finddata.m`: slice $\epsilon$-specific columns to two-column tables
   * `wb_preaveraging.m`: wild-bootstrapped preaveraging
 
-* **`MCExamples/` — Monte Carlo Examples**
+* **`MCExamples/` — Monte Carlo examples**
 
   * `simulatePrices/`
   
