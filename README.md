@@ -13,7 +13,7 @@ Constructs the test statistic from the empirical quantities $S_{2}$ and $\overli
 * **Precomputed tables**:
 
   * `h_vec.mat`: two-column table $[m, h_{2}(m)]$
-  * `h_eps_vec.mat`: wide table across $\epsilon \in [0.01,\dots,1.00]$ with $[m, h_{2,\epsilon}(m)]$
+  * `h_eps_vec.mat`: wide table across $\epsilon \in [0.01,1.00]$ with $[m, h_{2,\epsilon}(m)]$
   * `avar_r.mat`: wide table across $\epsilon$ with $[m, V_{\epsilon}(m)]$
 
 * **Simulators**:
