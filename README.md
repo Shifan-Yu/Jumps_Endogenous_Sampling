@@ -41,7 +41,7 @@ Constructs the test statistic from the empirical quantities $S_{2}$ and $\overli
   * `ret_delta.m`: price duration (barrier-hitting) sampling
   * `finddata.m`: slice $\epsilon$-specific columns to two-column tables
   * `wb_preaveraging.m`: wild-bootstrapped preaveraging
-  * * `h_vec.mat`, `h_eps_vec.mat`, `avar_r.mat`: saved tables used by the test
+  * `h_vec.mat`, `h_eps_vec.mat`, `avar_r.mat`: saved tables used by the test
 
 * **`MCExamples/` — Monte Carlo examples**
 
