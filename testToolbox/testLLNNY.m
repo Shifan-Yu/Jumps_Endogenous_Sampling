@@ -14,10 +14,10 @@ function [test, m_hat_eps, m_hat, N_c] = testLLNNY(price, c, epsilon, H2_tab, H2
 %   1) Extract PDS returns at c: r^{(c)} and compute squared returns r2.
 %   2) Empirical scale-free moments:
 %         Y_0      = (1/N_c) Σ r2 / c^2                     ≈ h_2(m)
-%         Y_eps    = (1/N_c) Σ min(r2, (c(1+ε))^2) / c^2    ≈ h^ε(m)
+%         Y_eps    = (1/N_c) Σ min(r2, (c(1+ε))^2) / c^2    ≈ h_2,ε(m)
 %   3) Invert the monotone maps on the grid:
-%         m_hat     : h_2(m_hat)     ≈ Y_0
-%         m_hat_eps : h^ε(m_hat_eps) ≈ Y_eps
+%         m_hat     : h_2(m_hat)       ≈ Y_0
+%         m_hat_eps : h_2,ε(m_hat_eps) ≈ Y_eps
 %   4) Standardize T_LLNNY = ((m_hat_eps/m_hat) − 1) by √( AVAR(m_hat_eps) / n )
 % -----------------------------------------------------------------------------------
 
@@ -51,4 +51,5 @@ function [test, m_hat_eps, m_hat, N_c] = testLLNNY(price, c, epsilon, H2_tab, H2
     test = (m_hat_eps / m_hat - 1) / sqrt( max(realmin, AVAR_m) / n );
 
 end
+
 
