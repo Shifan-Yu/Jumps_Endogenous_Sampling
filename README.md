@@ -8,7 +8,7 @@ You can find the latest draft and supplemental materials on [the author’s webs
 ## What’s inside
 
 * **Test statistic (`testLLNNY.m`)**:
-Constructs the test statistic from the empirical quantities $S_{2}$ and $\overline S_{2,\epsilon}$ by inverting the tabulated maps $h_{2}(m)$ and $h_{2,\epsilon}(m)$ to obtain the implied barriers $\widehat m$ and $\widehat m_{\epsilon}$. The statistic then uses the precomputed variance function $V_{\epsilon}(m)$ on the same $m$-grid.
+Constructs the test statistic from the empirical quantities $S_{2}$ and $\overline S_{2,\epsilon}$ by inverting the tabulated maps $h_{2}(m)$ and $\overline h_{2,\epsilon}(m)$ to obtain the implied barriers $\widehat m$ and $\widehat m_{\epsilon}$. The statistic then uses the precomputed variance function $V_{\epsilon}(m)$ on the same $m$-grid.
 
 * **Precomputed tables**:
 
@@ -28,7 +28,7 @@ Constructs the test statistic from the empirical quantities $S_{2}$ and $\overli
 
 * **`numerical_h_hbar/` — Reproduce the function tables**
 
-  * `h_simulate.m`: compute $h_{2}$, $h_{2,\epsilon}$, first-order derivatives, and $V_{\epsilon}$ on an $m$-grid
+  * `h_simulate.m`: compute $h_{2}$, $\overline h_{2,\epsilon}$, first-order derivatives, and $V_{\epsilon}$ on an $m$-grid
   * `h_first_derivative.m`: local-linear slope estimator of $h'(m)$
   * `ret_delta.m`: price duration (barrier-hitting) sampling
   * `h_vec.mat`, `h_eps_vec.mat`, `avar_r.mat`: saved tables used by the test
@@ -83,9 +83,9 @@ Constructs the test statistic from the empirical quantities $S_{2}$ and $\overli
 * **`h_simulate.m`** simulates a long standard-Gaussian random walk (length $10^9$) and sweeps an integer $m$-grid (e.g., $1$ to $90$). For each $m$ it computes
   $\mu_2(m)=\mathbb{E}[(Z_{1}^{(m)})^2]$ and
   $\mu_{2,\epsilon}(m)=\mathbb{E}[\{(Z_{1}^{(m)}\wedge m(1+\epsilon))^2\}]$ for $\epsilon \in [0.01,1.00]$,
-  then tabulates $h_{2}(m)=\mu_2(m)/m^2$ and $h_{2,\epsilon}(m)=\mu_{2,\epsilon}(m)/m^2$.
+  then tabulates $h_{2}(m)=\mu_2(m)/m^2$ and $\overline h_{2,\epsilon}(m)=\mu_{2,\epsilon}(m)/m^2$.
 
-* **Derivatives.** `h_first_derivative.m` estimates $h_2'(m)$ and $h_{2,\epsilon}'(m)$ by local-linear regression around each grid point of $m$, which feed the delta-method variance.
+* **Derivatives.** `h_first_derivative.m` estimates $h_2'(m)$ and $\overline h_{2,\epsilon}'(m)$ by local-linear regression around each grid point of $m$, which feed the delta-method variance.
 
 * **Variance function.** The script computes the variance and covariance terms (denoted $v$, $v_{\epsilon}$, $c_{\epsilon}$ in code) and assembles $V_{\epsilon}(m)$. The file `avar_r.mat` stores $V_{\epsilon}(m)$ on the same $m$-grid.
 
