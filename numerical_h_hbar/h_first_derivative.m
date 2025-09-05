@@ -1,7 +1,7 @@
 function [h_dev] = h_first_derivative(x_trial, h_vec)
 % h_first_derivative: local-linear slope estimate of h'(x) at x_trial
 % ---------------------------------------------------------------------------------
-% Method (same as your original):
+% Method:
 %   Fit OLS of h on x with an intercept over a local window around x_trial,
 %   then take the slope as the derivative estimate.
 %   This stabilizes the numerical derivative of h(x)=mu2(x)/x^2 for MC data.
@@ -13,10 +13,6 @@ function [h_dev] = h_first_derivative(x_trial, h_vec)
 % Output
 %   h_dev   : estimated derivative h'(x_trial)
 %
-% Differences from the one you pasted:
-%   - Safer indexing at boundaries (never runs past the grid).
-%   - Numerically stable linear solve using backslash (no inv()).
-%   - Finite-difference fallback if the local window collapses.
 % ---------------------------------------------------------------------------------
 
     x_all = h_vec(:,1);
@@ -62,3 +58,4 @@ function [h_dev] = h_first_derivative(x_trial, h_vec)
     % Slope is the derivative estimate
     h_dev = beta_hat(2);
 end
+
