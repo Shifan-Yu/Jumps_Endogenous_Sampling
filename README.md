@@ -1,6 +1,6 @@
 # Testing for Jumps in a Discretely Observed Price Process with Endogenous Sampling Times
 
-This repository contains the MATLAB code and simulation examples for **“Testing for Jumps in a Discretely Observed Price Process with Endogenous Sampling Times.”**
+This repository contains the MATLAB code and simulation examples for **“Testing for Jumps in a Discretely Observed Price Process with Endogenous Sampling Times”**
 ([Paper link](https://doi.org/10.1016/j.jeconom.2025.106132)).
 
 ---
